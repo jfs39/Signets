@@ -1,0 +1,10 @@
+:host {
+    --background-one: #1a1a1a;
+    --background-two:#0c0c0c;
+}
+
+.navbar-custom {
+    background-image: linear-gradient(to bottom right, var(--background-one) , var(--background-two));
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
