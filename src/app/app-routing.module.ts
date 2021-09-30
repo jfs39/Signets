@@ -4,13 +4,13 @@ import { MesSignetsComponent } from './mes-signets/mes-signets.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: 'mesSignets', component: MesSignetsComponent},
-  {path: '', component: HomeComponent},
-  {path: '**', component: HomeComponent},
+	{ path: 'mesSignets', component: MesSignetsComponent },
+	{ path: '', component: HomeComponent },
+	{ path: '**', component: HomeComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
