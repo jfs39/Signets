@@ -13,17 +13,18 @@ export class LoginComponent implements OnInit {
 
 	constructor(private auth: AngularFireAuth, private router: Router) {}
 
-	async onLogin() {
-		const { email, password } = this.loginForm.value;
-
-		await this.auth.signInWithEmailAndPassword(email, password);
-		this.router.navigate(['']);
-	}
-
 	ngOnInit(): void {
 		this.loginForm = new FormGroup({
 			email: new FormControl('', Validators.required),
 			password: new FormControl('', Validators.required),
 		});
+	}
+
+	async onLogin() {
+		const { email, password } = this.loginForm.value;
+
+		await this.auth.signInWithEmailAndPassword(email, password);
+
+		this.router.navigate(['']);
 	}
 }

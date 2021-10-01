@@ -14,4 +14,8 @@
             "source.fixAll.eslint": true
         }
     },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+    },
 }

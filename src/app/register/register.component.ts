@@ -13,13 +13,6 @@ export class RegisterComponent implements OnInit {
 
 	constructor(private auth: AngularFireAuth, private router: Router) {}
 
-	async createUser() {
-		const { email, password } = this.profileForm.value;
-
-		const user = await this.auth.createUserWithEmailAndPassword(email, password);
-		this.router.navigate(['']);
-	}
-
 	ngOnInit(): void {
 		this.profileForm = new FormGroup({
 			email: new FormControl('', Validators.required),
@@ -27,5 +20,12 @@ export class RegisterComponent implements OnInit {
 			firstname: new FormControl('', Validators.required),
 			lastname: new FormControl('', Validators.required),
 		});
+	}
+
+	async createUser() {
+		const { email, password } = this.profileForm.value;
+
+		const user = await this.auth.createUserWithEmailAndPassword(email, password);
+		this.router.navigate(['']);
 	}
 }
