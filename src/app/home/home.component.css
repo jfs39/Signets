@@ -19,7 +19,7 @@ color: white;
 #parallax-image{
 
     background-image: url("../../assets/img/bg1.jpeg");
-    height:94vh;
+    height:92vh;
     width: 100%;
     justify-content: center;
     background-attachment: fixed;
@@ -32,7 +32,7 @@ color: white;
 #parallax-image-two{
 
     background-image: url("../../assets/img/bg2.jpeg");
-    height:80vh;
+    height:70vh;
     width: 100%;
     justify-content: center;
     background-attachment: fixed;

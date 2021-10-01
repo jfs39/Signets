@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "signets-app": {
+      "hosting": {
+        "Signets": [
+          "signets-app"
+        ]
+      }
+    }
+  }
+}

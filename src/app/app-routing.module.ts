@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { MesSignetsComponent } from './mes-signets/mes-signets.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { MesSignetsComponent } from './mes-signets/mes-signets.component';
+import { RegisterComponent } from './register/register.component';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-	{ path: 'mesSignets', component: MesSignetsComponent },
+	{
+		path: 'mesSignets',
+		component: MesSignetsComponent,
+		canActivate: [AngularFireAuthGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin },
+	},
+	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent },
 	{ path: '', component: HomeComponent },
 	{ path: '**', component: HomeComponent },
 ];
