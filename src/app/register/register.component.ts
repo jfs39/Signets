@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 	profileForm!: FormGroup;
-
+	accountErrorMessage = '';
 	constructor(private auth: AngularFireAuth, private router: Router) {}
 
 	ngOnInit(): void {
@@ -27,5 +27,20 @@ export class RegisterComponent implements OnInit {
 
 		const user = await this.auth.createUserWithEmailAndPassword(email, password);
 		this.router.navigate(['']);
+		/*.catch(error){
+			switch (error.code) {
+			  case "auth/invalid-email":
+			  case "auth/wrong-password":
+			  case "auth/user-not-found":
+			  {
+				 this.accountErrorMessage = "Wrong email address or password.";
+				 break;
+			  }
+				 default:
+			  {
+				  this.accountErrorMessage = "Unexpected Error";
+				  break;
+			  }
+		 }*/
 	}
 }
