@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
 
 	async onLogout() {
 		await this.auth.signOut();
-		this.router.navigate(['login']);
+		//this.router.navigate(['login']);
 	}
 }

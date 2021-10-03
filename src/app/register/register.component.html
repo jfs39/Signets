@@ -30,6 +30,9 @@
 	</div>
 </form>
 
-<div class="container-fluid">
-	<div *ngIf="accountErrorMessage">{{ accountErrorMessage }}</div>
-</div>
+<div *ngIf="hasError; then showError; else hideError"></div>
+<ng-template #showError>
+	{{ accountErrorMessage }}
+</ng-template>
+<ng-template #hideError></ng-template>
+

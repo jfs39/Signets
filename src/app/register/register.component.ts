@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import firebase from 'firebase';
 
 @Component({
 	selector: 'app-register',
@@ -11,7 +13,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 	profileForm!: FormGroup;
 	accountErrorMessage = '';
-	constructor(private auth: AngularFireAuth, private router: Router) {}
+	hasError = false;
+	constructor(private auth: AngularFireAuth, private router: Router,private db: AngularFirestore) {}
 
 	ngOnInit(): void {
 		this.profileForm = new FormGroup({
@@ -22,25 +25,41 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
+	 convertMessage(code: string): string {
+		 
+		switch (code) {
+			case 'auth/user-disabled': {
+				return 'Sorry your user is disabled.';
+			}
+			case 'auth/user-not-found': {
+				return 'Sorry user not found.';
+			}
+			case 'auth/invalid-email':{
+				return 'Désolé, adresse E-mail invalide ou vide';
+			}
+			case 'auth/weak-password':{
+				return 'Désolé, votre mot de passe est trop faible.';
+			}
+			case 'auth/email-already-in-use':{
+				return 'Désolé, votre adresse E-mail est déjà utilisée.';
+			}
+
+			default: {
+				return 'Login error try again later.';
+			}
+		}
+	}
+
 	async createUser() {
 		const { email, password } = this.profileForm.value;
+		try{
+			const user = await this.auth.createUserWithEmailAndPassword(email, password);
+			this.router.navigate(['']);
+		}catch(error){
+			const authError = error as firebase.auth.Error;
+			this.accountErrorMessage = this.convertMessage(authError.code);
+			this.hasError = true;
 
-		const user = await this.auth.createUserWithEmailAndPassword(email, password);
-		this.router.navigate(['']);
-		/*.catch(error){
-			switch (error.code) {
-			  case "auth/invalid-email":
-			  case "auth/wrong-password":
-			  case "auth/user-not-found":
-			  {
-				 this.accountErrorMessage = "Wrong email address or password.";
-				 break;
-			  }
-				 default:
-			  {
-				  this.accountErrorMessage = "Unexpected Error";
-				  break;
-			  }
-		 }*/
+		}
 	}
 }
