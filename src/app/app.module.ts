@@ -9,9 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MesSignetsComponent } from './mes-signets/mes-signets.component';
 import { RegisterComponent } from './register/register.component';
+import { AproposComponent } from './apropos/apropos.component';
 
 @NgModule({
-	declarations: [AppComponent, MesSignetsComponent, HomeComponent, RegisterComponent, LoginComponent],
+	declarations: [AppComponent, MesSignetsComponent, HomeComponent, RegisterComponent, LoginComponent, AproposComponent],
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase)],
 	providers: [],
 	bootstrap: [AppComponent],
