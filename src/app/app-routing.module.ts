@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { AproposComponent } from "./apropos/apropos.component";
+import { AproposComponent } from './apropos/apropos.component';
+import { CreateSignetComponent } from './create-signet/create-signet.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MesSignetsComponent } from './mes-signets/mes-signets.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
 	},
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
-	{ path: 'apropos', component:AproposComponent },
+	{ path: 'apropos', component: AproposComponent },
+	{ path: 'create', component: CreateSignetComponent },
 	{ path: '', component: HomeComponent },
 	{ path: '**', component: HomeComponent },
 ];
