@@ -20,7 +20,12 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'apropos', component: AproposComponent },
-	{ path: 'create', component: CreateSignetComponent },
+	{
+		path: 'create',
+		component: CreateSignetComponent,
+		canActivate: [AngularFireAuthGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin },
+	},
 	{ path: '', component: HomeComponent },
 	{ path: '**', component: HomeComponent },
 ];
