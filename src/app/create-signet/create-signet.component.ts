@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
@@ -16,7 +16,7 @@ export class CreateSignetComponent implements OnInit {
 	hasError = false;
 	user: firebase.User | null = null;
 
-	constructor(private auth: AngularFireAuth, private router: Router, public db: AngularFireDatabase) {}
+	constructor(private auth: AngularFireAuth, private router: Router, public db: AngularFirestore) {}
 
 	ngOnInit(): void {
 		this.addForm = new FormGroup({
@@ -34,11 +34,9 @@ export class CreateSignetComponent implements OnInit {
 		const { name, description, link } = this.addForm.value;
 		const email = this.user?.email;
 
-		this.db.list('Signets').push({ NomSignet: name, DescriptionSignet: description, Signet: link, UserEmail: email });
-		//	} catch (error) {
-		//const authError = error as firebase.auth.Error;
-		//this.accountErrorMessage = this.convertMessage(authError.code);
-		//		this.hasError = true;
-		//	}
+		if (name != '' && description != '' && email != '' && link != '') {
+			this.db.collection('Signets').add({ NomSignet: name, DescriptionSignet: description, Lien: link, UserEmail: email });
+			this.router.navigate(['mesSignets']);
+		}
 	}
 }

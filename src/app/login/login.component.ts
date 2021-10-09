@@ -24,22 +24,20 @@ export class LoginComponent implements OnInit {
 	}
 
 	async onLogin() {
-		try{
-		const { email, password } = this.loginForm.value;
+		try {
+			const { email, password } = this.loginForm.value;
 
-		await this.auth.signInWithEmailAndPassword(email, password);
+			await this.auth.signInWithEmailAndPassword(email, password);
 
-		this.router.navigate(['']);
-	}catch(error){
-		const authError = error as firebase.auth.Error;
-		this.accountErrorMessage = this.convertMessage(authError.code);
-		this.hasError = true;
-
-	}
+			this.router.navigate(['/mesSignets']);
+		} catch (error) {
+			const authError = error as firebase.auth.Error;
+			this.accountErrorMessage = this.convertMessage(authError.code);
+			this.hasError = true;
+		}
 	}
 
 	convertMessage(code: string): string {
-		 
 		switch (code) {
 			case 'auth/user-disabled': {
 				return 'Sorry your user is disabled.';
@@ -47,13 +45,13 @@ export class LoginComponent implements OnInit {
 			case 'auth/user-not-found': {
 				return 'Sorry user not found.';
 			}
-			case 'auth/invalid-email':{
-				return 'Désolé, l\'adresse e-mail entrée est invalide ou vide.';
+			case 'auth/invalid-email': {
+				return "Désolé, l'adresse e-mail entrée est invalide ou vide.";
 			}
-			case 'auth/weak-password':{
+			case 'auth/weak-password': {
 				return 'Désolé, votre mot de passe est trop faible.';
 			}
-			case 'auth/email-already-in-use':{
+			case 'auth/email-already-in-use': {
 				return 'Désolé, votre adresse E-mail est déjà utilisée.';
 			}
 

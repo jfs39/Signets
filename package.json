@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
     "@types/gsap": "^3.0.0",
+    "angularfire2": "^5.4.2",
     "bootstrap": "^5.1.0",
     "firebase": "^8.10.0",
     "gsap": "^3.7.1",

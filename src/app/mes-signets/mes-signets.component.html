@@ -1,1 +1,35 @@
-<p>mes-signets works!</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3"></div>
+		<div class="col-6">
+			<div *ngIf="(signets | async)?.length; then showSignets; else notShow"></div>
+			<ng-template #showSignets>
+				<ul *ngFor="let signet of signets | async">
+					<li>
+						{{ signet.NomSignet }} : <a href="{{ signet.Lien }}">{{ signet.Lien }}</a>
+						<button type="button" class="btn btn-primary" (click)="editSignet(signet)">Éditer</button>
+						<button type="button" class="btn btn-primary" (click)="deleteSignet(signet)">Supprimer</button>
+						<div *ngIf="editState && signetAEditer.id == signet.id">
+							<form (ngSubmit)="updateSignet(signet)">
+								<div class="row">
+									<div class="input-field col s6">
+										<input type="text" placeholder="Nom du Signet" [(ngModel)]="signet.NomSignet" name="nom" />
+									</div>
+									<div class="input-field col s6">
+										<input type="text" placeholder="Description du Signet" [(ngModel)]="signet.DescriptionSignet" name="description" />
+									</div>
+									<div class="input-field col s6">
+										<input type="text" placeholder="Insérer le lien du signet ici" [(ngModel)]="signet.Lien" name="lien" />
+									</div>
+									<input type="submit" value="Update Signet" class="btn btn-primary" />
+								</div>
+							</form>
+						</div>
+					</li>
+				</ul>
+			</ng-template>
+			<ng-template #notShow>Oups... vous n'avez pas encore fait de signets!</ng-template>
+		</div>
+		<div class="col-3"></div>
+	</div>
+</div>

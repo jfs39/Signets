@@ -1,28 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import firebase from 'firebase';
+import { Component } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 	title = 'Signets';
 
-	user: firebase.User | null = null;
-
-	constructor(private auth: AngularFireAuth, private router: Router) {}
-
-	ngOnInit(): void {
-		this.auth.onAuthStateChanged((user) => {
-			this.user = user;
-		});
+	constructor(private authService: AuthService) {}
+	get user() {
+		return this.authService.user;
 	}
-
-	async onLogout() {
-		await this.auth.signOut();
-		//this.router.navigate(['login']);
+	onLogout() {
+		this.authService.logout();
 	}
 }
