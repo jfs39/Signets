@@ -13,6 +13,8 @@ import { AuthService } from '../auth.service';
 export class MesSignetsComponent implements OnInit {
 	signets!: Observable<any[]>;
 	editState: boolean = false;
+	signetEnVue: boolean = false;
+	signetAVoir: any;
 	signetAEditer: any;
 	//signets!: any[];
 
@@ -36,12 +38,29 @@ export class MesSignetsComponent implements OnInit {
 		let signetADelete = this.db.collection('Signets').doc(signet.id);
 		signetADelete.delete();
 	}
+
 	editSignet(signet: any) {
-		this.editState = true;
-		this.signetAEditer = signet;
+		if (!this.editState) {
+			this.editState = true;
+			this.signetAEditer = signet;
+		} else {
+			this.editState = false;
+			this.signetAEditer = null;
+		}
 	}
+
 	updateSignet(signet: any) {
 		let signetAUpdate = this.db.collection('Signets').doc(signet.id);
 		signetAUpdate.update(signet);
+	}
+
+	voirSignet(signet: any) {
+		if (!this.signetEnVue) {
+			this.signetEnVue = true;
+			this.signetAVoir = signet;
+		} else {
+			this.signetEnVue = false;
+			this.signetAVoir = null;
+		}
 	}
 }
