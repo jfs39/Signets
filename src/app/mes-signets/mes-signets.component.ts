@@ -48,10 +48,15 @@ export class MesSignetsComponent implements OnInit {
 			this.signetAEditer = null;
 		}
 	}
+	clearEditSignet() {
+		this.editState = false;
+		this.signetAEditer = null;
+	}
 
 	updateSignet(signet: any) {
 		let signetAUpdate = this.db.collection('Signets').doc(signet.id);
 		signetAUpdate.update(signet);
+		this.clearEditSignet();
 	}
 
 	voirSignet(signet: any) {

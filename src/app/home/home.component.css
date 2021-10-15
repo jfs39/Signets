@@ -19,7 +19,7 @@ color: white;
 #parallax-image{
 
     background-image: url("../../assets/img/bg1.jpeg");
-    height:92vh;
+    height:55rem;
     width: 100%;
     justify-content: center;
     background-attachment: fixed;

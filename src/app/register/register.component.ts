@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 	profileForm!: FormGroup;
 	accountErrorMessage = '';
 	hasError = false;
-	constructor(private auth: AngularFireAuth, private router: Router,private db: AngularFirestore) {}
+	constructor(private auth: AngularFireAuth, private router: Router, private db: AngularFirestore) {}
 
 	ngOnInit(): void {
 		this.profileForm = new FormGroup({
@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
-	 convertMessage(code: string): string {
-		 
+	convertMessage(code: string): string {
 		switch (code) {
 			case 'auth/user-disabled': {
 				return 'Sorry your user is disabled.';
@@ -34,13 +33,13 @@ export class RegisterComponent implements OnInit {
 			case 'auth/user-not-found': {
 				return 'Sorry user not found.';
 			}
-			case 'auth/invalid-email':{
+			case 'auth/invalid-email': {
 				return 'Désolé, adresse E-mail invalide ou vide';
 			}
-			case 'auth/weak-password':{
+			case 'auth/weak-password': {
 				return 'Désolé, votre mot de passe est trop faible.';
 			}
-			case 'auth/email-already-in-use':{
+			case 'auth/email-already-in-use': {
 				return 'Désolé, votre adresse E-mail est déjà utilisée.';
 			}
 
@@ -51,15 +50,19 @@ export class RegisterComponent implements OnInit {
 	}
 
 	async createUser() {
+		let regexp = new RegExp(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		);
 		const { email, password } = this.profileForm.value;
-		try{
-			const user = await this.auth.createUserWithEmailAndPassword(email, password);
-			this.router.navigate(['']);
-		}catch(error){
+		try {
+			if (regexp.test(email)) {
+				const user = await this.auth.createUserWithEmailAndPassword(email, password);
+				this.router.navigate(['']);
+			}
+		} catch (error) {
 			const authError = error as firebase.auth.Error;
 			this.accountErrorMessage = this.convertMessage(authError.code);
 			this.hasError = true;
-
 		}
 	}
 }

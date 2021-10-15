@@ -24,10 +24,17 @@ export class LoginComponent implements OnInit {
 	}
 
 	async onLogin() {
+		let regexp = new RegExp(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		);
 		try {
 			const { email, password } = this.loginForm.value;
-
-			await this.auth.signInWithEmailAndPassword(email, password);
+			if (regexp.test(email)) {
+				await this.auth.signInWithEmailAndPassword(email, password);
+			} else {
+				this.accountErrorMessage = 'Champs invalides.';
+				this.hasError = true;
+			}
 
 			this.router.navigate(['/mesSignets']);
 		} catch (error) {
