@@ -19,16 +19,15 @@ color: white;
 #parallax-image{
 
     background-image: url("../../assets/img/bg1.jpeg");
-    height:55rem;
-    width: 100%;
-    justify-content: center;
+    height: 55rem;
+    min-width: 200px;
+    max-width: 100%;
+    justify-content: center;    
     background-attachment: fixed;
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: cover;
 
 }
-
 #parallax-image-two{
 
     background-image: url("../../assets/img/bg2.jpeg");
