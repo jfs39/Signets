@@ -1,1 +1,34 @@
-<p>modifier-user works!</p>
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-4">Mon Compte :</h1>
+		<p class="lead">L'adresse e-mail associée à ce compte en ce moment est : {{ authentication.currentUser?.email }}.</p>
+
+		<button class="btn btn-primary" (click)="setEditState()">Changer l'adresse e-mail</button>
+		<div *ngIf="editState">
+			<form [formGroup]="setUserForm">
+				<div class="form-group">
+					<label for="inputEmail3" class="labels"
+						>Nouvelle Adresse E-mail *ATTENTION: Si vous changez votre adresse e-mail, vous perdrez tous vos signets*</label
+					>
+					<input type="email" class="form-control custom-input" id="inputEmail3" placeholder="Email" formControlName="email" />
+				</div>
+			</form>
+		</div>
+		<button class="btn btn-primary" (click)="setEditStatePassword()">Changer le mot de passe</button>
+		<div *ngIf="editStatePassword">
+			<form [formGroup]="setUserFormPassword">
+				<div class="form-group">
+					<label for="inputPassword3" class="labels">Mot de Passe</label>
+
+					<input
+						type="password"
+						class="form-control custom-input"
+						id="inputPassword3"
+						placeholder="Mot de passe"
+						formControlName="password"
+					/>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

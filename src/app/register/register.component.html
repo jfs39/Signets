@@ -1,48 +1,37 @@
-
 <div class="container-fluid" id="bg-image">
 	<div class="row">
 		<div class="col-sm-2"></div>
-			<div class="col-sm-8">
-				<section>
-					<div class="circle1 glass text-center">
+		<div class="col-sm-8">
+			<section>
+				<div class="circle1 glass text-center">
+					<form [formGroup]="profileForm">
+						<div class="form-group">
+							<label for="inputEmail3" class="labels">Adresse E-mail</label>
+							<input type="email" class="form-control custom-input" id="inputEmail3" placeholder="Email" formControlName="email" />
+						</div>
 
-						<form [formGroup]="profileForm">
-							<div class="form-group">
-								<label for="inputEmail3" class="labels">Email</label>
-								<input type="email" class="form-control custom-input" id="inputEmail3" placeholder="Email" formControlName="email" />	
-							</div>
-							<div class="form-group">
-								<label for="inputFirstName3" class="labels">Prénom</label>
-							
-									<input type="text" class="form-control custom-input" id="inputFirstName3" placeholder="Prénom" formControlName="firstname" />
-								
-							</div>
-							<div class="form-group">
-								<label for="inputLastName3" class="labels">Nom de Famille</label>
-								
-									<input type="text" class="form-control custom-input" id="inputLastName3" placeholder="Nom" formControlName="lastname" />
-							
-							</div>
-							<div class="form-group">
-								<label for="inputPassword3" class="labels">Password</label>
-								
-									<input type="password" class="form-control custom-input" id="inputPassword3" placeholder="Mot de passe" formControlName="password" />
-								
-							</div>
-							<div class="form-group">
-								
-									<button type="submit" class="btn custom-btn" id="btnRegister" (click)="createUser()">Créer un compte</button>
-									<label for="btnRegister" *ngIf="hasError; then showError; else hideError"></label>
-									<ng-template #showError>
-										<p class="errorMessage">{{ accountErrorMessage }}</p>
-									</ng-template>
-									<ng-template #hideError></ng-template>
-								</div>
-						</form>
-					</div>
-				</section>
-			  </div>
+						<div class="form-group">
+							<label for="inputPassword3" class="labels">Mot de Passe</label>
+
+							<input
+								type="password"
+								class="form-control custom-input"
+								id="inputPassword3"
+								placeholder="Mot de passe"
+								formControlName="password"
+							/>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn custom-btn" id="btnRegister" (click)="createUser()">Créer un compte</button>
+							<label for="btnRegister" *ngIf="hasError; then showError; else hideError"></label>
+							<ng-template #showError>
+								<p class="errorMessage">{{ accountErrorMessage }}</p>
+							</ng-template>
+							<ng-template #hideError></ng-template>
+						</div>
+					</form>
+				</div>
+			</section>
 		</div>
 	</div>
-
-
+</div>

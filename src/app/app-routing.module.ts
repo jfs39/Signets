@@ -6,6 +6,7 @@ import { CreateSignetComponent } from './create-signet/create-signet.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MesSignetsComponent } from './mes-signets/mes-signets.component';
+import { ModifierUserComponent } from './modifier-user/modifier-user.component';
 import { RegisterComponent } from './register/register.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -23,6 +24,12 @@ const routes: Routes = [
 	{
 		path: 'create',
 		component: CreateSignetComponent,
+		canActivate: [AngularFireAuthGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin },
+	},
+	{
+		path: 'myuser',
+		component: ModifierUserComponent,
 		canActivate: [AngularFireAuthGuard],
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
 	},
