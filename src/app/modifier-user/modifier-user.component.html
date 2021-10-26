@@ -1,34 +1,55 @@
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h1 class="display-4">Mon Compte :</h1>
-		<p class="lead">L'adresse e-mail associée à ce compte en ce moment est : {{ authentication.currentUser?.email }}.</p>
-
-		<button class="btn btn-primary" (click)="setEditState()">Changer l'adresse e-mail</button>
-		<div *ngIf="editState">
-			<form [formGroup]="setUserForm">
-				<div class="form-group">
-					<label for="inputEmail3" class="labels"
-						>Nouvelle Adresse E-mail *ATTENTION: Si vous changez votre adresse e-mail, vous perdrez tous vos signets*</label
-					>
-					<input type="email" class="form-control custom-input" id="inputEmail3" placeholder="Email" formControlName="email" />
+<div class="container">
+	<div class="row">
+	  <div class="col-sm-2"></div>
+	  <div class="col-sm">
+		<div class="jumbotron jumbotron-fluid d-inline-flex">
+			<div class="container">
+				<h1 class="display-4">Mon Compte :</h1>
+				<p class="lead">L'adresse e-mail associée à ce compte est : {{ authentication.currentUser?.email }}.</p>
+				<p class="lead">Voici les actions disponibles avec votre compte:</p>
+				<button class="btn btn-custom" (click)="setEditState()">Changer l'adresse e-mail</button>
+				<div *ngIf="editState">
+					<form [formGroup]="setUserForm">
+						<div class="form-group">
+							<label for="inputEmail3" class="labels"
+								>Nouvelle Adresse E-mail</label
+							>
+							<input type="email" class="form-control custom-input" id="inputEmail3" placeholder="Email" formControlName="email" />
+						</div>
+						<div class="form-group">
+							<button type="submit" id="btnEmail" class="btn btn-custom" (click)="changeEmail()">Confirmer le changement</button>
+							<label for="btnEmail" *ngIf="hasStatusEmail; then showStatusEmail; else hideStatusEmail"></label>
+							<ng-template #showStatusEmail>
+								<br />
+								<p class="errorMessage">{{ accountMessage }}</p>
+							</ng-template>
+							<ng-template #hideStatusEmail></ng-template>
+						</div>
+					</form>
 				</div>
-			</form>
-		</div>
-		<button class="btn btn-primary" (click)="setEditStatePassword()">Changer le mot de passe</button>
-		<div *ngIf="editStatePassword">
-			<form [formGroup]="setUserFormPassword">
-				<div class="form-group">
-					<label for="inputPassword3" class="labels">Mot de Passe</label>
-
-					<input
-						type="password"
-						class="form-control custom-input"
-						id="inputPassword3"
-						placeholder="Mot de passe"
-						formControlName="password"
-					/>
+				<button class="btn btn-custom" (click)="setEditStatePassword()">Changer le mot de passe</button>
+				<div *ngIf="editStatePassword">
+					<form [formGroup]="setUserFormPassword">
+						<div class="form-group">
+							<label for="inputPassword3" class="labels">Mot de Passe</label>
+		
+							<input
+								type="password"
+								class="form-control custom-input"
+								id="inputPassword3"
+								placeholder="Mot de passe"
+								formControlName="password"
+							/>
+						</div>
+						<div class="form-group">
+							<button type="submit" id="btnPassword" class="btn btn-custom" (click)="changePassword()">Confirmer le changement</button>
+						</div>
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
+		<!--<button class="btn btn-custom" (click)="deleteAccount()">Supprimer le compte</button>-->
+	  </div>
+	  <div class="col-sm-2"></div>
 	</div>
-</div>
+  </div>

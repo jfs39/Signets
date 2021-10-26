@@ -25,11 +25,11 @@ export class MesSignetsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const { email } = this.user;
+		const userId = this.user.uid;
 
 		this.signets = this.db
 			.collection('Signets', (ref) => {
-				return ref.where('UserEmail', '==', email);
+				return ref.where('UserId', '==', userId);
 			})
 			.valueChanges({ idField: 'id' });
 	}

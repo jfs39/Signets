@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
 	selector: 'app-create-signet',
@@ -35,7 +36,7 @@ export class CreateSignetComponent implements OnInit {
 		const email = this.user?.email;
 
 		if (name != '' && description != '' && email != '' && link != '') {
-			this.db.collection('Signets').add({ NomSignet: name, DescriptionSignet: description, Lien: link, UserEmail: email });
+			this.db.collection('Signets').add({ NomSignet: name, DescriptionSignet: description, Lien: link, UserEmail: email , SignetId: uuidv4(), UserId: this.user?.uid});
 			this.router.navigate(['mesSignets']);
 		}
 	}
