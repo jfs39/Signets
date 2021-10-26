@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
+import { AuthService } from '../auth.service';
+
 @Component({
 	selector: 'app-modifier-user',
 	templateUrl: './modifier-user.component.html',
@@ -18,7 +20,7 @@ export class ModifierUserComponent implements OnInit {
 	hasStatusEmail = false;
 	
 
-	constructor(private router: Router, private db: AngularFirestore) {}
+	constructor(private router: Router, private db: AngularFirestore, private authService : AuthService) {}
 
 	ngOnInit(): void {
 		this.setUserForm = new FormGroup({
@@ -49,9 +51,20 @@ export class ModifierUserComponent implements OnInit {
 		}
 	}
 
-	async deleteAccount(){
+	 async deleteAccount(){
+		 
 		if(confirm("Etes-vous certains de vouloir supprimer votre compte?")){
-			console.log("deleted");
+			let userId = this.authentication.currentUser?.uid;
+			const signets = await this.db
+			.collection('Signets', (ref) => {
+				return ref.where('UserId', '==', userId);
+			}).get().toPromise();
+
+			signets.forEach(signet=>{
+				signet.ref.delete();
+			});
+
+			await this.authentication.currentUser?.delete();
 		}
 	
 	}

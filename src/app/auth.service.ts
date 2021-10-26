@@ -29,4 +29,8 @@ export class AuthService implements OnInit, OnDestroy {
 	async logout() {
 		await this.auth.signOut();
 	}
+
+	getUser(){
+		return this.auth.currentUser;
+	}
 }
